@@ -1,0 +1,149 @@
+text {
+	font-size: 10px;
+	fill: #4f442b;
+}
+
+path.domain {
+	display: none;
+}
+
+g > text.active {
+	font-size: 30px;
+}
+
+circle {
+    fill: #EBD8C1;
+      stroke: #9A8B7A;
+      stroke-width: 1px;
+}
+
+line {
+	stroke: #93C464;
+}
+
+circle.active {
+	fill: #FE9922;
+}
+
+circle.inactive {
+	fill: #C4B9AC;
+}
+
+rect {
+	fill: #fdd985;
+}
+
+#modal {
+	position:fixed;
+	left:150px;
+	top:20px;
+	z-index:1;
+	background: white;
+	border: 1px black solid;
+	box-shadow: 10px 10px 5px #888888;
+}
+tr {
+	border: 1px gray solid;
+}
+td {
+	font-size: 10px;
+}
+td.data {
+	font-weight: 900;
+}
+
+.grid {
+      stroke: #C4B9AC;
+      stroke-width: 1px;
+      fill: #CF7D1C;
+}
+.arc {
+       stroke: #9A8B7A;
+       fill: none;
+}
+.node {
+      fill: #EBD8C1;
+      stroke: #9A8B7A;
+      stroke-width: 1px;
+}
+circle.active {
+            fill: #FE9922;
+}
+path.active {
+            stroke: #FE9922;
+}
+
+circle.source {
+	fill: #93C464;
+}
+
+circle.target {
+	fill: #41A368;
+}
+
+g.node > text {
+	stroke: none;
+	fill: #4F442B;
+}
+
+marker > path {
+	fill: none;
+}
+
+path.countries {
+     stroke-width: 1;
+     stroke: #75739F;
+     fill: #5EAFC6;
+}
+circle.cities {
+     stroke-width: 1;
+     stroke: #4F442B;
+     fill: #FCBC34;
+}
+circle.centroid {
+     fill: #75739F;
+     pointer-events: none;
+}
+rect.bbox {
+     fill: none;
+     stroke-dasharray: 5 5;
+     stroke: #75739F;
+     stroke-width: 2;
+     pointer-events: none;
+}
+path.graticule {
+     fill: none;
+     stroke-width: 1;
+     stroke: #9A8B7A;
+}
+path.graticule.outline {
+     stroke: #9A8B7A;
+}
+
+path.merged {
+	fill: #9A8B7A;
+	stroke: #4F442B;
+	stroke-width: 2px;
+}
+
+text {
+font-size: 10px;
+text-anchor: middle;
+	fill: #4f442b;
+
+}
+g > text.active {
+font-size: 30px;
+}
+circle {
+fill: #75739F;
+stroke: black;
+stroke-width: 1px;
+}
+circle.active {
+fill: #FE9922;
+}
+circle.inactive {
+fill: #C4B9AC;
+}
+

@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+</head>
+<body>
+  <svg style="width:500px;height:500px;">
+  </svg>
+  <script type="text/javascript">
+d3.select("svg")
+  .selectAll("rect")
+  .data([15, 50, 22, 8, 100, 10])
+  .enter()
+  .append("rect")
+  .attr("width", 10)
+  .attr("height", d => d)
+  .attr("x", (d,i) => i * 10)
+  .style("fill", "#FE9922")
+  .style("stroke", "#9A8B7A")
+  .style("stroke-width", "1px")
+  .attr("x", (d,i) => i * 10)
+  .attr("y", d => 100 - d);
+
+  </script>
+</body>
+</html>

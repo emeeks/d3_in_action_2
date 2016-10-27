@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<script src="../js/colorbrewer.js" type="text/javascript"></script>
+<style>
+text {
+	font-size: 10px;
+	text-anchor: middle;
+	fill: #4f442b;
+}
+g > text.active {
+	font-size: 30px;
+}
+circle {
+	fill: #75739F;
+	stroke: black;
+	stroke-width: 1px;
+}
+circle.active {
+	fill: #FE9922;
+}
+circle.inactive {
+	fill: #C4B9AC;
+}
+
+  #modal {
+    position:fixed;
+    left:150px;
+    top:20px;
+    z-index:1;
+    background: white;
+    border: 1px black solid;
+    box-shadow: 10px 10px 5px #888888;
+  }
+  tr {
+    border: 1px gray solid;
+  }
+  td {
+    font-size: 10px;
+  }
+  td.data {
+    font-weight: 900;
+  }
+
+</style>
+</head>
+<body>
+<div id="viz">
+<svg style="width:500px;height:500px;" />
+</div>
+<div id="controls" />
+  <script type="text/javascript">
+
+d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)})
+
+function overallTeamViz(incomingData) {
+  d3.select("svg")
+    .append("g")
+    .attr("id", "teamsG")
+    .attr("transform", "translate(50,300)")
+    .selectAll("g")
+    .data(incomingData)
+    .enter()
+    .append("g")
+    .attr("class", "overallG")
+    .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)")
+
+  var teamG = d3.selectAll("g.overallG")
+
+   teamG
+   .append("circle").attr("r", 0)
+   .transition()
+   .delay((d,i) => i * 100)
+   .duration(500)
+   .attr("r", 40)
+   .transition()
+   .duration(500)
+   .attr("r", 20);
+
+  teamG
+    .append("text")
+    .style("text-anchor", "middle")
+    .attr("y", 30)
+	.text(d => d.team)
+
+d3.html("../resources/icon.svg", loadSVG);
+function loadSVG(svgData) {
+    d3.selectAll("g").each(function() {
+    var gParent = this;
+    d3.select(svgData).selectAll("path").each(function() {
+          gParent.appendChild(this.cloneNode(true))
+      });
+    });
+
+	d3.selectAll("g.overallG").each(function(d) {
+	    d3.select(this).selectAll("path").datum(d)
+	});
+
+	var fourColorScale = d3.scaleOrdinal()
+	    .domain(["UEFA", "CONMEBOL", "CAF", "AFC"])
+	    .range(["#5eafc6", "#FE9922", "#93C464", "#fcbc34" ])
+
+	d3.selectAll("path")
+		.style("fill", p => fourColorScale(p.region))
+		.style("stroke", "black").style("stroke-width", "2px");
+
+};
+
+}
+  </script>
+</body>
+</html>

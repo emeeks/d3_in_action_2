@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+</head>
+<body>
+   <div id="vizcontainer">
+   <svg style="width:500px;height:500px;border:1px lightgray solid;" />
+   </div>
+  <script type="text/javascript">
+	d3.select("svg")
+	  .append("line")
+	  .attr("x1", 20)
+	  .attr("y1", 20)
+	  .attr("x2",400)
+	  .attr("y2",400)
+	  .style("stroke", "black")
+	  .style("stroke-width","2px");
+	d3.select("svg")
+	  .append("text")
+	  .attr("x",20)
+	  .attr("y",20)
+	  .text("HELLO");
+	d3.select("svg")
+	  .append("circle")
+	  .attr("r", 20)
+	  .attr("cx",20)
+	  .attr("cy",20)
+	  .style("fill","red");
+	d3.select("svg")
+	  .append("circle")
+	  .attr("r", 100)
+	  .attr("cx",400)
+	  .attr("cy",400)
+	  .style("fill","lightblue");
+	d3.select("svg")
+	  .append("text")
+	  .attr("x",400)
+	  .attr("y",400)
+	  .text("WORLD");
+
+  </script>
+</body>
+</html>
+

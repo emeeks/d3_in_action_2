@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<style>
+text {
+	font-size: 10px;
+	text-anchor: middle;
+	fill: #4f442b;
+}
+g > text.active {
+	font-size: 30px;
+}
+circle {
+	fill: #75739F;
+	stroke: black;
+	stroke-width: 1px;
+}
+circle.active {
+	fill: #FE9922;
+}
+circle.inactive {
+	fill: #C4B9AC;
+}
+
+</style>
+</head>
+<body>
+  <svg style="width:500px;height:500px;">
+  </svg>
+  <script type="text/javascript">
+d3.json("../data/tweets.json", data => {dataViz(data.tweets)})
+
+function dataViz(incomingData) {
+incomingData.forEach(d => {
+     d.impact = d.favorites.length + d.retweets.length;
+     d.tweetTime = new Date(d.timestamp);
+})
+
+var maxImpact = d3.max(incomingData, d => d.impact)
+var startEnd = d3.extent(incomingData, d => d.tweetTime)
+var timeRamp = d3.scaleTime().domain(startEnd).range([ 50, 450 ]);
+var yScale = d3.scaleLinear().domain([ 0, maxImpact ]).range([ 0, 460 ]);
+var radiusScale = d3.scaleLinear()
+	.domain([ 0, maxImpact ])
+	.range([ 1, 20 ])
+
+d3.select("svg").selectAll("circle")
+	.data(incomingData, d => JSON.stringify(d))
+	.enter().append("circle")
+	.attr("r", d => radiusScale(d.impact))
+	.attr("cx", d => timeRamp(d.tweetTime))
+	.attr("cy", d => 480 - yScale(d.impact))
+	.style("fill", "#75739F ")
+	.style("stroke", "black")
+	.style("stroke-width", "1px")
+
+var filteredData = incomingData.filter(d => d.impact > 0)
+d3.selectAll("circle")
+	.data(filteredData, d => JSON.stringify(d))
+	.exit()
+	.remove()
+
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "extends": "netflix-dea",
+  "rules": {
+    "indent": 0,
+    "quotes": 0,
+    "semi": 0,
+    "space-before-blocks": 0,
+    "react/wrap-multilines": 0,
+    "react/jsx-uses-vars": 2,
+    "curly": 0
+  }
+}

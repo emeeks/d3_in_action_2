@@ -1,0 +1,24 @@
+{
+  "name": "reactd3",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.7.0"
+  },
+  "dependencies": {
+    "d3-array": "1.0.1",
+    "d3-axis": "1.0.3",
+    "d3-geo": "1.2.6",
+    "d3-scale": "1.0.3",
+    "d3-selection": "1.0.2",
+    "d3-shape": "1.0.3",
+    "react": "^15.3.2",
+    "react-dom": "15.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

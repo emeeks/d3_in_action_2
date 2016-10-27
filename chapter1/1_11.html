@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+</head>
+<body>
+  <div id="someDiv" style="width:200px;height:100px;border:black 1px solid;">
+<input id="someCheckbox" type="checkbox" />
+  </div>
+<script type="text/javascript">
+	d3.select("#someDiv").style("border", "5px darkgray dashed");
+	d3.select("#someDiv").attr("id", "newID");
+	d3.select("#someCheckbox").property("checked", true);
+</script>
+</body>
+</html>

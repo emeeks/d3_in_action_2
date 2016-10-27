@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+</head>
+<body>
+  <svg style="width:500px;height:500px;">
+  </svg>
+  <script type="text/javascript">
+var yScale = d3.scaleLinear()
+               .domain([0,100,500])
+               .range([0,50,100])
+               .clamp(true);
+
+d3.select("svg")
+  .selectAll("rect")
+  .data([14, 68, 24500, 430, 19, 1000, 5555])
+  .enter()
+  .append("rect")
+  .attr("x", (d,i) => i * 10)
+  .attr("width", 10)
+  .attr("height", d => yScale(d))
+  .attr("y", d => 100 - yScale(d))
+  .style("fill", "#FE9922")
+  .style("stroke", "#9A8B7A")
+  .style("stroke-width", "1px")
+
+  </script>
+</body>
+</html>
