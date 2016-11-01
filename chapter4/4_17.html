@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<style>
+  path.domain {
+    stroke: none;
+  }
+</style>
+</head>
+<body>
+<div id="viz">
+<svg style="width:600px;height:600px;" />
+</div>
+  <script type="text/javascript">
+d3.csv("../data/tweetdata.csv", lineChart);
+function lineChart(data) {
+
+xScale = d3.scaleLinear().domain([1,10.5]).range([20,480]);
+   yScale = d3.scaleLinear().domain([0,35]).range([480,20]);
+   xAxis = d3.axisBottom()
+        .scale(xScale)
+        .tickSize(480)
+        .tickValues([1,2,3,4,5,6,7,8,9,10]);
+
+   d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+   yAxis = d3.axisRight()
+        .scale(yScale)
+        .ticks(10)
+        .tickSize(480);
+   d3.select("svg").append("g").attr("id", "yAxisG").call(yAxis);
+
+   d3.select("svg").selectAll("circle.tweets")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "tweets")
+        .attr("r", 5)
+        .attr("cx", d => xScale(d.day))
+        .attr("cy", d => yScale(d.tweets))
+        .style("fill", "#fe9a22");
+
+   d3.select("svg").selectAll("circle.retweets")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "retweets")
+        .attr("r", 5)
+        .attr("cx", d => xScale(d.day))
+        .attr("cy", d => yScale(d.retweets))
+        .style("fill", "#5eaec5");
+
+   d3.select("svg").selectAll("circle.favorites")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "favorites")
+        .attr("r", 5)
+        .attr("cx", d => xScale(d.day))
+        .attr("cy", d => yScale(d.favorites))
+        .style("fill", "#92c463");
+}
+
+  </script>
+</body>
+</html>

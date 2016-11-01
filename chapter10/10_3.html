@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+  <script src="d3.grid_03.js" type="text/JavaScript"></script>
+</head>
+<body>
+<svg height="500" width="500"></svg>
+<script type="text/javascript">
+d3.json("../data/tweets.json", makeAGrid)
+function makeAGrid(data) {
+    var grid = d3.gridLayout();
+    grid.size([200,200]);
+    var griddedData = grid(data.tweets);
+    d3.select("svg")
+       .append("g")
+       .attr("transform", "translate(50,50)")
+       .selectAll("circle").data(griddedData)
+       .enter()
+       .append("circle")
+       .attr("cx", d => d.x)
+       .attr("cy", d => d.y)
+       .attr("r", 20)
+       .style("fill", "#93C464");
+    var fakeTweets = [];
+    for (var x = 0;x<12;x++) {
+        var tweet = {id: x, content: "Fake Tweet #" + x};
+        fakeTweets.push(tweet);
+    }
+    var doubledArray = data.tweets.concat(fakeTweets);
+    var newGriddedData = grid(doubledArray);
+    d3.select("g").selectAll("circle").data(newGriddedData)
+       .enter()
+       .append("circle")
+       .attr("cx", 0)
+       .attr("cy", 0)
+       .attr("r", 20)
+       .style("fill", "#41A368");
+    d3.select("g").selectAll("circle")
+       .transition()
+       .duration(1000)
+       .attr("cx", d => d.x)
+       .attr("cy", d => d.y)
+       .on("end", resizeGrid1);
+
+    function resizeGrid1() {
+      grid.size([200,400]);
+      grid(doubledArray);
+      d3.select("g").selectAll("circle")
+        .transition()
+        .duration(1000)
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y)
+        .on("end", resizeGrid2);
+    };
+
+    function resizeGrid2() {
+      grid.size([400,400]);
+      grid(doubledArray);
+      d3.select("g").selectAll("circle")
+        .transition()
+        .duration(1000)
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+    };
+
+}
+
+</script>
+</body>
+</html>

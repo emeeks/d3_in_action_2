@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<style>
+</style>
+</head>
+<body>
+<div id="viz">
+<svg style="width:600px;height:600px;" />
+</div>
+  <script type="text/javascript">
+d3.json("../data/tweets.json", viz)
+
+  function viz(data) {
+var depthScale = d3.scaleOrdinal()
+  .range(["#5EAFC6", "#FE9922", "#93c464", "#75739F"])
+
+var nestedTweets = d3.nest()
+  .key(d => d.user)
+  .entries(data.tweets);
+var packableTweets = {id: "All Tweets", values: nestedTweets};
+
+var root = d3.hierarchy(packableTweets, d => d.values)
+.sum(d => d.retweets ? d.retweets.length + d.favorites.length + 1 : undefined)
+
+var treemapLayout = d3.treemap()
+.size([500,500])
+
+treemapLayout(root)
+
+d3.select("svg")
+.selectAll("rect")
+      .data(root.descendants(),
+d => d.data.content || d.data.user || d.data.key)
+.enter()
+.append("rect")
+.attr("x", d => d.x0)
+.attr("y", d => d.y0)
+.attr("width", d => d.x1 - d.x0)
+.attr("height", d => d.y1 - d.y0)
+.style("fill", d => depthScale(d.depth))
+.style("stroke", "black")
+
+}
+  </script>
+</body>
+</html>

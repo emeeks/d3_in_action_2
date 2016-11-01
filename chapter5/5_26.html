@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<script src="../js/d3-sankey.js" type="text/JavaScript"></script>
+<style>
+</style>
+</head>
+<body>
+<div id="viz">
+<svg style="width:600px;height:600px;" />
+</div>
+  <script type="text/javascript">
+d3.json("../data/sitestats.json", sankeyViz)
+function sankeyViz(data) {
+   var sankey = d3.sankey()
+   .nodeWidth(1)
+   .nodePadding(200)
+   .size([460, 460])
+   .nodes(data.nodes)
+   .links(data.links)
+   .layout(200);
+
+var numLayouts = 1;
+d3.select("svg").on("click", moreLayouts);
+sankey.layout(numLayouts);
+function moreLayouts() {
+   numLayouts += 20;
+   sankey.layout(numLayouts);
+   d3.selectAll(".link")
+   .transition()
+   .duration(500)
+   .attr("d", sankey.link())
+   d3.selectAll(".node")
+   .transition()
+   .duration(500)
+   .attr("transform", d => "translate(" + d.x + "," + d.y + ")")
+}
+
+var intensityRamp = d3.scaleLinear()
+     .domain([0,d3.max(data.links, d => d.value) ])
+.range(["#fcd88b", "#cf7d1c"]);
+ d3.select("svg").append("g")
+    .attr("transform", "translate(20,20)").attr("id", "sankeyG");
+ d3.select("#sankeyG").selectAll(".link")
+     .data(data.links)
+     .enter().append("path")
+     .attr("class", "link")
+     .attr("d", sankey.link())
+     .style("stroke-width", d => d.dy)
+     .style("stroke-opacity", .5)
+     .style("fill", "none")
+     .style("stroke", d => intensityRamp(d.value))
+     .sort((a, b) => b.dy - a.dy)
+     .on("mouseover", function() {
+               d3.select(this).style("stroke-opacity", .8); })
+     .on("mouseout", () => {
+     d3.selectAll("path.link").style("stroke-opacity", .5); })
+
+ d3.select("#sankeyG").selectAll(".node")
+     .data(data.nodes)
+     .enter().append("g")
+     .attr("class", "node")
+     .attr("transform", d => "translate(" + d.x + "," + d.y + ")")
+
+ d3.selectAll(".node").append("circle")
+     .attr("height", d => d.dy)
+     .attr("r", d => d.dy / 2)
+     .attr("cy", d => d.dy / 2)
+     .style("fill", "#93c464")
+
+ d3.selectAll(".node").append("text")
+     .attr("x", 0)
+     .attr("y", d => d.dy / 2)
+     .attr("text-anchor", "middle")
+     .style("fill", "black")
+     .text(d => d.name);
+}
+</script>
+</body>
+</html>

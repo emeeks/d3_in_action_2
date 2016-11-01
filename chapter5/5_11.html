@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+<style>
+</style>
+</head>
+<body>
+<div id="viz">
+<svg style="width:600px;height:600px;" />
+</div>
+  <script type="text/javascript">
+d3.csv("../data/movies.csv", dataViz);
+function dataViz(data) {
+
+var xScale = d3.scaleLinear().domain([0, 10]).range([0, 500])
+var yScale = d3.scaleLinear().domain([0, 60]).range([480, 0])
+var heightScale = d3.scaleLinear().domain([0, 60]).range([0, 480])
+var movies = ["titanic", "avatar", "akira", "frozen", "deliverance", "avengers"]
+
+var fillScale = d3.scaleOrdinal()
+    .domain(movies)
+    .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F", "#5eafc6", "#41a368"])
+
+var xAxis = d3.axisBottom()
+    .scale(xScale)
+    .tickSize(500)
+    .tickValues([1,2,3,4,5,6,7,8,9,10]);
+
+d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+var yAxis = d3.axisRight()
+    .scale(yScale)
+    .ticks(10)
+    .tickSize(530);
+d3.select("svg").append("g").attr("id", "yAxisG").call(yAxis);
+
+stackLayout = d3.stack().keys(movies)
+
+d3.select("svg").selectAll("g.bar")
+    .data(stackLayout(data))
+    .enter()
+    .append("g")
+      .attr("class", "bar")
+    .each(function(d) {
+            d3.select(this).selectAll("rect")
+               .data(d)
+               .enter()
+               .append("rect")
+               .attr("x", (p,q) => xScale(q) + 30)
+               .attr("y", p => yScale(p[1]))
+               .attr("height", p => heightScale(p[1] - p[0]))
+               .attr("width", 40)
+               .style("fill", fillScale(d.key));
+    });
+
+}
+</script>
+</body>
+</html>
