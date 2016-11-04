@@ -84,7 +84,6 @@ function createArcDiagram(nodes,edges) {
     || p.target === d)
   }
   function edgeOver(d) {
-    console.log(d)
     d3.selectAll("path").classed("active", p => p === d)
     d3.selectAll("circle")
     .classed("source", p => p === d.source)

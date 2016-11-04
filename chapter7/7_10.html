@@ -17,7 +17,7 @@
 <svg style="width:600px;height:600px;" />
 </div>
   <script type="text/javascript">
-var depthScale = d3.scaleOrdinal()
+var roleScale = d3.scaleOrdinal()
   .domain(["contractor", "employee", "manager"])
   .range(["#75739F", "#41A368", "#FE9922"])
 
@@ -44,8 +44,8 @@ function createForceLayout(nodes,edges) {
     var linkForce = d3.forceLink()
 
      var simulation = d3.forceSimulation()
-      .force("charge", d3.forceManyBody().strength(-50))
-      .force("center", d3.forceCenter().x(250).y(250))
+      .force("charge", d3.forceManyBody().strength(-40))
+      .force("center", d3.forceCenter().x(300).y(300))
       .force("link", linkForce)
       .nodes(nodes)
       .on("tick", forceTick);
@@ -67,7 +67,7 @@ function createForceLayout(nodes,edges) {
       .attr("class", "node");
    nodeEnter.append("circle")
       .attr("r", 5)
-      .style("fill", d => depthScale(d.role))
+      .style("fill", d => roleScale(d.role))
    nodeEnter.append("text")
       .style("text-anchor", "middle")
       .attr("y", 15)

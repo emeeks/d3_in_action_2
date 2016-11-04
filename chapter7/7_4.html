@@ -96,7 +96,7 @@ function createAdjacencyMatrix(nodes, edges) {
   d3.selectAll("rect.grid").on("mouseover", gridOver);
         function gridOver(d) {
           d3.selectAll("rect").style("stroke-width", function (p) {
-       return p.x == d.x || p.y == d.y ? "3px" : "1px"});
+       return p.x == d.x || p.y == d.y ? "4px" : "1px"});
   }
 
   }

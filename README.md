@@ -1,4 +1,4 @@
-[D3.js in Action 2nd Edition](https://www.manning.com/books/d3-js-in-action) code and examples.
+[D3.js in Action 2nd Edition](https://www.manning.com/books/d3js-in-action-second-edition) code and examples.
 
 [d3.js](https://d3js.org)
 

@@ -42,7 +42,7 @@ function createArcDiagram(nodes,edges) {
     var nodeHash = {};
     nodes.forEach((node, x) => {
       nodeHash[node.id] = node
-      node.x = parseInt(x) * 40
+      node.x = parseInt(x) * 30
     })
     edges.forEach(edge => {
       edge.weight = parseInt(edge.weight)
@@ -72,7 +72,7 @@ function createArcDiagram(nodes,edges) {
     function arc(d,i) {
       var draw = d3.line().curve(d3.curveBasis);
       var midX = (d.source.x + d.target.x) / 2;
-      var midY = (d.source.x - d.target.x) * 2;
+      var midY = (d.source.x - d.target.x);
       return draw([[d.source.x,0],[midX,midY],[d.target.x,0]])
     }
   }
