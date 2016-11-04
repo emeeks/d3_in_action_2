@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import ReactDOM from 'react-dom'
 import { select, event } from 'd3-selection'
 import { scaleLinear } from 'd3-scale'
 import { brushX } from 'd3-brush'
@@ -21,7 +20,7 @@ class Brush extends Component {
   }
 
   createBrush() {
-    const node = ReactDOM.findDOMNode(this)
+    const node = this.node
     const scale = scaleLinear().domain([0,36])
       .range([0,this.props.size[0]]);
 
@@ -79,7 +78,7 @@ class Brush extends Component {
   }
 
   render() {
-    return <svg width={this.props.size[0]} height={50}></svg>
+    return <svg ref={node => this.node = node} width={this.props.size[0]} height={50}></svg>
   }
 }
 
