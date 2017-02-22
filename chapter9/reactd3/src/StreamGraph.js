@@ -38,7 +38,7 @@ class StreamGraph extends Component {
 
     return <svg width={this.props.size[0]} height={this.props.size[1]}>
       <g transform={"translate(0," + (-this.props.size[1] / 2) + ")"}>
-      {stacks}
+        {stacks}
       </g>
     </svg>
   }
