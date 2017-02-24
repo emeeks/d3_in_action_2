@@ -15,7 +15,7 @@
     "d3-shape": "1.0.3",
     "d3-svg-legend": "2.15.0",
     "d3-transition": "1.0.3",
-    "react": "^15.3.2",
+    "react": "15.3.2",
     "react-dom": "15.3.2"
   },
   "scripts": {
