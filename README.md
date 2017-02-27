@@ -5,6 +5,8 @@
 Everything is a self-contained example except for Chapter 9, which requires Node and NPM.
 
 Table of Contents
+
+Chapter 1
 *   [1_11.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter1/1_11.html)
 *   [1_16.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter1/1_16.html)
 *   [1_17.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter1/1_17.html)
@@ -17,6 +19,7 @@ Table of Contents
 *   [1_33.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter1/1_33.html)
 *   [1_34.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter1/1_34.html)
 
+Chapter 2
 *   [2_11.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter2/2_11.html)
 *   [2_12.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter2/2_12.html)
 *   [2_13.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter2/2_13.html)
@@ -33,6 +36,7 @@ Table of Contents
 *   [2_25.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter2/2_25.html)
 *   [2_27.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter2/2_27.html)
 
+Chapter 3
 *   [3_2.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter3/3_2.html)
 *   [3_3.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter3/3_3.html)
 *   [3_5.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter3/3_5.html)
@@ -54,6 +58,8 @@ Table of Contents
 *   [3_23.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter3/3_23.html)
 *   [3_24.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter3/3_24.html)
 
+
+Chapter 4
 *   [4_3.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter4/4_3.html)
 *   [4_4.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter4/4_4.html)
 *   [4_5.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter4/4_5.html)
@@ -73,6 +79,9 @@ Table of Contents
 *   [4_24.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter4/4_24.html)
 *   [4_25.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter4/4_25.html)
 
+
+Chapter 5
+
 *   [5_2.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter5/5_2.html)
 *   [5_4.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter5/5_4.html)
 *   [5_5.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter5/5_5.html)
@@ -89,6 +98,8 @@ Table of Contents
 *   [5_29.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter5/5_29.html)
 *   [5_30.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter5/5_30.html)
 
+Chapter 6
+
 *   [6_10.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter6/6_10.html)
 *   [6_11.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter6/6_11.html)
 *   [6_12.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter6/6_12.html)
@@ -103,6 +114,7 @@ Table of Contents
 *   [6_23.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter6/6_23.html)
 *   [6_24.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter6/6_24.html)
 
+Chapter 7
 *   [7_3.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter7/7_3.html)
 *   [7_4.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter7/7_4.html)
 *   [7_5.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter7/7_5.html)
@@ -120,6 +132,7 @@ Table of Contents
 *   [7_18.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter7/7_18.html)
 *   [7_19.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter7/7_19.html)
 
+Chapter 8
 *   [8_3.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter8/8_3.html)
 *   [8_4.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter8/8_4.html)
 *   [8_5.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter8/8_5.html)
@@ -137,6 +150,8 @@ Table of Contents
 
 [Chapter 9](chapter9)
 
+
+Chapter 10
 *   [10_1.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_1.html)
 *   [10_2.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_2.html)
 *   [10_3.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_3.html)
@@ -149,6 +164,8 @@ Table of Contents
 *   [10_10.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_10.html)
 *   [10_11.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_11.html)
 *   [10_12.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter10/10_12.html)
+
+Chapter 11
 
 *   [11_2.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter11/11_2.html)
 *   [11_4.html](https://github.com/kthotav/d3_in_action_2/tree/master/chapter11/11_4.html)
