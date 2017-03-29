@@ -6,7 +6,7 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/tweets.json", data => {dataViz(data.tweets)})
 
       function dataViz(incomingData) {
@@ -14,6 +14,7 @@
           d.impact = d.favorites.length + d.retweets.length;
           d.tweetTime = new Date(d.timestamp);
         });
+        
         var maxImpact = d3.max(incomingData, d => d.impact);
         var startEnd = d3.extent(incomingData, d => d.tweetTime);
         var timeRamp = d3.scaleTime().domain(startEnd).range([20,480]);

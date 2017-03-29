@@ -6,8 +6,10 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
-      var yScale = d3.scaleLinear().domain([0,100,500]).range([0,50,100])
+    <script>
+      var yScale = d3.scaleLinear()
+      				 .domain([0,100,500])
+      				 .range([0,50,100]);
 
       d3.select("svg")
         .selectAll("rect")
