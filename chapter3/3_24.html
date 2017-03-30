@@ -85,6 +85,7 @@
             .text(d => d.team);
         
         d3.html("../resources/icon.svg", loadSVG);
+        
         function loadSVG(svgData) {
           d3.selectAll("g").each(function() {
             var gParent = this;
