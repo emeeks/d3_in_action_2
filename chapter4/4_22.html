@@ -26,7 +26,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/movies.csv", lineChart);
       function lineChart(data) {
         var xScale = d3.scaleLinear().domain([ 1, 10 ]).range([ 20, 470 ]);

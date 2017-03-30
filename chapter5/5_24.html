@@ -10,7 +10,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/sitestats.json", sankeyViz);
       function sankeyViz(data) {
         var sankey = d3.sankey()

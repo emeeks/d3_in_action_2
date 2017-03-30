@@ -6,7 +6,7 @@
   </head>
   <body>
     <svg height="500" width="500"></svg>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/nodelist.csv", makeAGrid);
       function makeAGrid(data) {
         var salaryScale = d3.scaleLinear().domain([0,300000]).range([1,30]).clamp(true);

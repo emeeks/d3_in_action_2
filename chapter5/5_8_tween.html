@@ -9,7 +9,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/tweets.json", pieChart);
       function pieChart(data) {
         var fillScale = d3.scaleOrdinal()

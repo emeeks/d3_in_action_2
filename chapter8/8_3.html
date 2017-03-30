@@ -46,7 +46,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/world.geojson", createMap);
       function createMap(countries) {
         var aProjection = d3.geoMercator();

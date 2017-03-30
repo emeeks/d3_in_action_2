@@ -7,7 +7,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/boxplot.csv", scatterplot);
       function scatterplot(data) {
         xScale = d3.scaleLinear().domain([1,8]).range([20,470]);

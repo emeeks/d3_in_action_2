@@ -10,7 +10,7 @@
     <div id="viz">
       <svg style="width:600px;height:600px;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/worddata.csv", dataViz);
       function dataViz(data) {
         var wordScale = d3.scaleLinear().domain([0,75]).range([10,160]);
