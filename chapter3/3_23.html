@@ -46,12 +46,13 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;" ></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
+    <div id="controls" ></div>
+    
+    <script>
       
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
       
       function overallTeamViz(incomingData) {
         d3.select("svg")
@@ -63,7 +64,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
         
         var teamG = d3.selectAll("g.overallG");
         
@@ -84,13 +85,16 @@
             .text(d => d.team);
         
         d3.html("../resources/icon.svg", loadSVG);
+        
         function loadSVG(svgData) {
           d3.selectAll("g").each(function() {
             var gParent = this;
+            
             d3.select(svgData).selectAll("path").each(function() {
               gParent.appendChild(this.cloneNode(true));
             });
           });
+          
           d3.selectAll("path").style("fill", "#93C464")
               .style("stroke", "black").style("stroke-width", "1px");
         }

@@ -46,12 +46,13 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;" ></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
+    <div id="controls" ></div>
+    
+    <script>
      
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
       d3.text("../resources/modal.html", data => {
         d3.select("body").append("div").attr("id", "modal").html(data);
       });
@@ -66,7 +67,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
         
         var teamG = d3.selectAll("g.overallG");
         

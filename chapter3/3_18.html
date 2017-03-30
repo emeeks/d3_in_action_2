@@ -28,11 +28,12 @@
   <body>
     <div>Click a button to color by region using colorBrewer.Reds[3]</div>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;" ></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+    <div id="controls" ></div>
+    
+    <script>
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
       
       function overallTeamViz(incomingData) {
         d3.select("svg")
@@ -44,7 +45,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
         
         var teamG = d3.selectAll("g.overallG");
         
@@ -66,6 +67,7 @@
         
         var dataKeys = Object.keys(incomingData[0])
           .filter(d => d !== "team" && d !== "region");
+        
         d3.select("#controls").selectAll("button.teams")
           .data(dataKeys).enter()
           .append("button")
@@ -74,10 +76,13 @@
         
         function buttonClick(datapoint) {
           var maxValue = d3.max(incomingData, d => parseFloat(d[datapoint]));
+          
           var colorQuantize = d3.scaleQuantize()
             .domain([0,maxValue]).range(colorbrewer.Reds[3]);
+          
           var radiusScale = d3.scaleLinear()
             .domain([0,maxValue]).range([2,20]);
+          
           d3.selectAll("g.overallG").select("circle").transition().duration(1000)
               .style("fill", d => colorQuantize(d[datapoint]))
               .attr("r", d => radiusScale(d[datapoint]));

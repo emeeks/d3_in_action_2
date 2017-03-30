@@ -27,11 +27,12 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;" ></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+    <div id="controls" ></div>
+    
+    <script>
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
       
       function overallTeamViz(incomingData) {
         d3.select("svg")
@@ -43,7 +44,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
         
         var teamG = d3.selectAll("g.overallG");
         
@@ -64,7 +65,7 @@
             .text(d => d.team);
         
         d3.selectAll("g.overallG").insert("image", "text")
-            .attr("xlink:href", d => "../images/" + d.team + ".png")
+            .attr("xlink:href", d => `../images/${d.team}.png`)
             .attr("width", "45px").attr("height", "20px").attr("x", "-22")
             .attr("y", "-10");
       }

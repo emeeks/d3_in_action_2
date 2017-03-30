@@ -28,11 +28,12 @@
   <body>
     <div>Click a button to color by region using schemeCategory10</div>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;" ></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+    <div id="controls" ></div>
+    
+    <script>
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
       
       function overallTeamViz(incomingData) {
         d3.select("svg")
@@ -44,7 +45,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
         
         var teamG = d3.selectAll("g.overallG");
         
@@ -66,6 +67,7 @@
         
         var dataKeys = Object.keys(incomingData[0])
           .filter(d => d !== "team" && d !== "region");
+        
         d3.select("#controls").selectAll("button.teams")
           .data(dataKeys).enter()
           .append("button")
@@ -76,10 +78,13 @@
           var maxValue = d3.max(incomingData, function(el) {
             return parseFloat(el[datapoint]);
           });
+          
           var tenColorScale = d3.scaleOrdinal()
             .domain(["UEFA", "CONMEBOL", "CAF",  "AFC"])
             .range(d3.schemeCategory10);
+          
           var radiusScale = d3.scaleLinear().domain([0,maxValue]).range([2,20]);
+          
           d3.selectAll("g.overallG").select("circle").transition().duration(1000)
               .style("fill", p => tenColorScale(p.region))
               .attr("r", p => radiusScale(p[datapoint ]));
