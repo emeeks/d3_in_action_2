@@ -22,12 +22,13 @@
       <svg style="width:600px;height:600px;" ></svg>
     </div>
     <script>
-      d3.json("../data/tweets.json", data => { histogram(data.tweets) });
+      d3.json("../data/tweets.json", data => histogram(data.tweets) );
       
       function histogram(tweetsData) {
         var xScale = d3.scaleLinear().domain([ 0, 5 ]).range([ 0, 500 ]);
         var yScale = d3.scaleLinear().domain([ 0, 10 ]).range([ 400, 0 ]);
         var xAxis = d3.axisBottom().scale(xScale).ticks(5);
+        
         var histoChart = d3.histogram();
         
         histoChart
@@ -49,6 +50,7 @@
         
         d3.select("svg").append("g").attr("class", "x axis")
             .attr("transform", "translate(0,400)").call(xAxis);
+        
         d3.select("g.axis").selectAll("text").attr("dx", 50);
       }
     </script>

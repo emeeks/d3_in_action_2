@@ -40,6 +40,7 @@
       var yScale = d3.scaleLinear().domain([ -3, 3 ]).range([ 400, 0 ]);
       var yAxis = d3.axisRight().scale(yScale)
         .tickSize(300);
+      
       d3.select("svg").append("g").call(yAxis);
       
       var area = d3.area()
@@ -53,7 +54,7 @@
         .data([sampleData1, sampleData2, sampleData3])
         .enter()
         .append("g")
-          .attr("transform", (d,i) => "translate(" + (50 + i * 100) + ",0)")
+          .attr("transform", (d,i) => `translate(${(50 + i * 100)} , 0)`)
         .append("path")
           .style("stroke", "black")
           .style("fill", (d,i) => fillScale(i))

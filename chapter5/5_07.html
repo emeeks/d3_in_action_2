@@ -23,10 +23,13 @@
     </div>
     <script>
       d3.json("../data/tweets.json", pieChart)
+      
       function pieChart(data) {
+    	  
         var nestedTweets = d3.nest()
           .key(d => d.user)
           .entries(data.tweets);
+        
         nestedTweets.forEach(d => {
           d.numTweets = d.values.length;
           d.numFavorites = d3.sum(d.values, p => p.favorites.length);
@@ -45,7 +48,8 @@
         var yourPie = pieChart(nestedTweets);
         
         var fillScale = d3.scaleOrdinal()
-          .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F"])
+          .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F"]);
+        
         d3.select("svg")
           .append("g")
             .attr("transform","translate(250,250)")
