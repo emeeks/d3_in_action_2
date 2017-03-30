@@ -21,6 +21,7 @@
       var yExtent = d3.extent(scatterData, d => d.friends);
       var xScale = d3.scaleLinear().domain(xExtent).range([0,500]);
       var yScale = d3.scaleLinear().domain(yExtent).range([0,500]);
+      
       d3.select("svg").selectAll("circle")
         .data(scatterData).enter().append("circle")
           .attr("r", 5).attr("cx", d => xScale(d.salary))
