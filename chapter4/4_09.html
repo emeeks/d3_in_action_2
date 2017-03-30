@@ -16,14 +16,20 @@
         {friends: 27, salary: 56000}, 
         {friends: 8, salary: 74000}
       ];
+      
       var xScale = d3.scaleLinear().domain([0,180000]).range([0,500]);
       var yScale = d3.scaleLinear().domain([0,27]).range([0,500]);
+      
       xAxis = d3.axisBottom().scale(xScale)
         .tickSize(500).ticks(4);
+      
       d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+      
       yAxis = d3.axisRight().scale(yScale)
         .ticks(16).tickSize(500);
+      
       d3.select("svg").append("g").attr("id", "yAxisG").call(yAxis);
+      
       d3.select("svg").selectAll("circle")
         .data(scatterData).enter()
         .append("circle").attr("r", 5)
