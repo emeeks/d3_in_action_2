@@ -30,7 +30,7 @@
       <svg style="width:600px;height:600px;" ></svg>
     </div>
     <script>
-      var PromiseWrapper = (d) => new Promise(resolve => d3.csv(d, (p) => resolve(p)));
+      var PromiseWrapper = d => new Promise(resolve => d3.csv(d, p => resolve(p)));
       
       Promise
         .all([
@@ -47,6 +47,7 @@
           nodeHash[node.id] = node
           node.x = parseInt(x) * 30
         });
+        
         edges.forEach(edge => {
           edge.weight = parseInt(edge.weight)
           edge.source = nodeHash[edge.source]
@@ -61,9 +62,10 @@
           .enter()
           .append("path")
             .attr("class", "arc")
-            .style("stroke-width", function(d) {return d.weight * 2;})
+            .style("stroke-width", d => d.weight * 2)
             .style("opacity", .25)
             .attr("d", arc);
+        
         arcG.selectAll("circle")
           .data(nodes)
           .enter()

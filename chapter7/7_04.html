@@ -27,7 +27,7 @@
       <svg style="width:600px;height:600px;" ></svg>
     </div>
     <script>
-      var PromiseWrapper = (d) => new Promise(resolve => d3.csv(d, (p) => resolve(p)));
+   	  var PromiseWrapper = d => new Promise(resolve => d3.csv(d, p => resolve(p)));
       
       Promise
         .all([
@@ -41,7 +41,7 @@
       function createAdjacencyMatrix(nodes, edges) {
         var edgeHash = {};
         edges.forEach(edge => {
-          var id = edge.source + "-" + edge.target;
+          var id = `${edge.source}-${edge.target}`;
           edgeHash[id] = edge;
         });
         
@@ -49,7 +49,7 @@
         nodes.forEach((source, a) => {
           nodes.forEach((target, b) => {
             var grid = {
-              id: source.id + "-" + target.id,
+              id: `${source.id}-${target.id}`,
               x: b,
               y: a, weight: 0
             };
@@ -71,9 +71,9 @@
             .attr("class", "grid")
             .attr("width", 25)
             .attr("height", 25)
-            .attr("x", function (d) {return d.x * 25})
-            .attr("y", function (d) {return d.y * 25})
-            .style("fill-opacity", function (d) {return d.weight * .2;});
+            .attr("x", d => d.x * 25)
+            .attr("y", d => d.y * 25)
+            .style("fill-opacity", d => d.weight * .2);
         
         d3.select("svg")
           .append("g")
