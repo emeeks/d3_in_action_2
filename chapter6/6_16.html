@@ -37,7 +37,7 @@
           .enter()
           .append("g")
             .attr("class", "node")
-            .attr("transform", d => "translate(" +d.y+","+d.x+")");
+            .attr("transform", d => `translate(${d.y},${d.x})`);
         
         d3.selectAll("g.node")
           .append("circle")
