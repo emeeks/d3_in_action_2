@@ -48,11 +48,15 @@
     </div>
     <script>
       d3.json("../data/world.geojson", createMap);
+      
       function createMap(countries) {
+    	  
         var aProjection = d3.geoMercator()
           .scale(80)
           .translate([250, 250]);
+        
         var geoPath = d3.geoPath().projection(aProjection);
+        
         d3.select("svg").selectAll("path").data(countries.features)
           .enter()
           .append("path")
