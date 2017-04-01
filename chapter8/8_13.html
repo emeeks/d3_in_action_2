@@ -46,11 +46,10 @@
     <div id="controls">
     </div>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
-      var PromiseWrapper = (xhr, d) => new 
-        Promise(resolve => xhr(d, (p) => resolve(p)));
+    <script>
+      var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, p => resolve(p)));
 
       Promise
         .all([
@@ -93,10 +92,12 @@
             .attr("cy", d => projection([d.x,d.y])[1]);
 
         var graticule = d3.geoGraticule();
+        
         d3.select("svg").insert("path", "path.countries")
             .datum(graticule)
             .attr("class", "graticule line")
             .attr("d", geoPath);
+        
         d3.select("svg").insert("path", "path.countries")
             .datum(graticule.outline)
             .attr("class", "graticule outline")

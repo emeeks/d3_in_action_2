@@ -45,11 +45,10 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
-      var PromiseWrapper = (xhr, d) => new 
-        Promise(resolve => xhr(d, (p) => resolve(p)));
+    <script>
+      var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, p => resolve(p)));
 
       Promise
         .all([
@@ -68,20 +67,25 @@
           .scale(120)
           .translate([250, 250])
           .center([20,0]);
+        
         var geoPath = d3.geoPath().projection(projection);
         var featureSize = 
           d3.extent(countries.features, d => geoPath.area(d));
         var countryColor = d3.scaleQuantize()
           .domain(featureSize).range(colorbrewer.Reds[7]);
+        
         var graticule = d3.geoGraticule();
+        
         d3.select("svg").append("path")
             .datum(graticule)
             .attr("class", "graticule line")
             .attr("d", geoPath);
+        
         d3.select("svg").append("path")
             .datum(graticule.outline)
             .attr("class", "graticule outline")
             .attr("d", geoPath);
+        
         d3.select("svg").selectAll("path.countries")
           .data(countries.features)
           .enter()
@@ -90,7 +94,9 @@
             .attr("class", "countries")
             .style("fill", d => countryColor(geoPath.area(d)))
             .style("stroke", "none");
+        
         mergeAt(0);
+        
         function mergeAt(mergePoint) {
           var filteredCountries = topoCountries.objects.countries.geometries
             .filter(d => {
@@ -98,6 +104,7 @@
                 topojson.feature(topoCountries, d) );
               return thisCenter[1] > mergePoint? true : null;
             });
+          
           d3.select("svg").append("g")
               .datum(topojson.merge(topoCountries, filteredCountries))
               .insert("path")

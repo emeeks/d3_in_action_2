@@ -47,8 +47,8 @@
   </head>
   <body>
     <canvas height="500" width="500"></canvas>
-    <svg height="500" width="500"></svg>
-    <script type="text/javascript">
+    <svg style="height: 500px; width: 500px;"></svg>
+    <script>
       var sampleData = d3.range(3000).map(d => {
         var datapoint = {};
         datapoint.id = "Sample Node " + d;
@@ -56,6 +56,7 @@
         datapoint.y = Math.random() * 500;
         return datapoint;
       });
+      
       d3.select("svg").selectAll("circle")
         .data(sampleData)
         .enter()

@@ -7,9 +7,9 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/tweets.json", viz);
       
       function viz(data) {
@@ -37,7 +37,7 @@
           .enter()
           .append("g")
             .attr("class", "node")
-            .attr("transform", d => "translate(" +d.y+","+d.x+")");
+            .attr("transform", d => `translate(${d.y},${d.x})`);
         
         d3.selectAll("g.node")
           .append("circle")

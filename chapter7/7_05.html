@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <style>
+      .grid {
+        stroke: #9A8B7A;
+        stroke-width: 1px;
+        fill: #CF7D1C;
+      }
+      .arc {
+        stroke: #9A8B7A;
+        fill: none;
+      }
+      .node {
+        fill: #EBD8C1;
+        stroke: #9A8B7A;
+        stroke-width: 1px;
+      }
+      circle.active {
+        fill: #FE9922;
+      }
+      path.active {
+        stroke: #FE9922;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viz">
+      <svg style="width:600px;height:600px;" ></svg>
+    </div>
+    <script>
+      var PromiseWrapper = d => new Promise(resolve => d3.csv(d, p => resolve(p)));
+      
+      Promise
+        .all([
+          PromiseWrapper("../data/nodelist.csv"),
+          PromiseWrapper("../data/edgelist.csv")
+        ])
+        .then(resolve => {
+          createArcDiagram(resolve[0], resolve[1])
+        });
+      
+      function createArcDiagram(nodes,edges) {
+        var nodeHash = {};
+        nodes.forEach((node, x) => {
+          nodeHash[node.id] = node
+          node.x = parseInt(x) * 30
+        });
+        
+        edges.forEach(edge => {
+          edge.weight = parseInt(edge.weight)
+          edge.source = nodeHash[edge.source]
+          edge.target = nodeHash[edge.target]
+        });
+        
+        var arcG = d3.select("svg").append("g").attr("id", "arcG")
+            .attr("transform", "translate(50,250)");
+        
+        arcG.selectAll("path")
+          .data(edges)
+          .enter()
+          .append("path")
+            .attr("class", "arc")
+            .style("stroke-width", d => d.weight * 2)
+            .style("opacity", .25)
+            .attr("d", arc);
+        
+        arcG.selectAll("circle")
+          .data(nodes)
+          .enter()
+          .append("circle")
+            .attr("class", "node")
+            .attr("r", 10)
+            .attr("cx", function (d) {return d.x;});
+        
+        function arc(d,i) {
+          var draw = d3.line().curve(d3.curveBasis);
+          var midX = (d.source.x + d.target.x) / 2;
+          var midY = (d.source.x - d.target.x);
+          return draw([[d.source.x,0],[midX,midY],[d.target.x,0]]);
+        }
+      }
+    </script>
+  </body>
+</html>

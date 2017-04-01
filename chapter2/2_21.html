@@ -6,11 +6,12 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
-      d3.csv("../data/cities.csv", data => {dataViz(data)});
+    <script>
+      d3.csv("../data/cities.csv", data => dataViz(data));
+      
       function dataViz(incomingData) {
 
-        var maxPopulation = d3.max(incomingData, d => parseInt(d.population))
+        var maxPopulation = d3.max(incomingData, d => parseInt(d.population));
         var yScale = d3.scaleLinear().domain([0,maxPopulation]).range([0,460]);
 
         d3.select("svg").attr("style","height: 480px; width: 600px;");

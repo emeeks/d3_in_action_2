@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <style>
+      path.countries {
+        stroke-width: 1;
+        stroke: #75739F;
+        fill: #5EAFC6;
+      }
+      circle.cities {
+        stroke-width: 1;
+        stroke: #4F442B;
+        fill: #FCBC34;
+      }
+      circle.centroid {
+        fill: #75739F;
+        pointer-events: none;
+      }
+      rect.bbox {
+        fill: none;
+        stroke-dasharray: 5 5;
+        stroke: #75739F;
+        stroke-width: 2;
+        pointer-events: none;
+      }
+      path.graticule {
+        fill: none;
+        stroke-width: 1;
+        stroke: #9A8B7A;
+      }
+      path.graticule.outline {
+        stroke: #9A8B7A;
+      }
+
+      path.merged {
+        fill: #9A8B7A;
+        stroke: #4F442B;
+        stroke-width: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="controls">
+    </div>
+    <div id="viz">
+      <svg style="width:600px;height:600px;" ></svg>
+    </div>
+    <script>
+      var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, (p) => resolve(p)));
+
+      Promise
+        .all([
+          PromiseWrapper(d3.json, "../data/world.geojson"),
+          PromiseWrapper(d3.csv, "../data/cities.csv")
+        ])
+        .then(resolve => {
+          createMap(resolve[0], resolve[1]);
+        });
+
+      function createMap(countries, cities) {
+    	  
+        var projection = d3.geoMercator()
+          .scale(80)
+          .translate([250, 250]);
+        
+        var geoPath = d3.geoPath().projection(projection);
+        
+        d3.select("svg").selectAll("path").data(countries.features)
+          .enter()
+          .append("path")
+            .attr("class", "countries")
+            .attr("d", geoPath);
+        
+        d3.select("svg").selectAll("circle").data(cities)
+          .enter()
+          .append("circle")
+            .attr("class", "cities")
+            .attr("r", 3)
+            .attr("cx", d => projection([d.x,d.y])[0])
+            .attr("cy", d => projection([d.x,d.y])[1]);
+        
+      }
+    </script>
+  </body>
+</html>

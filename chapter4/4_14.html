@@ -5,29 +5,36 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/boxplot.csv", scatterplot);
+      
       function scatterplot(data) {
+    	  
         xScale = d3.scaleLinear().domain([1,8]).range([20,470]);
         yScale = d3.scaleLinear().domain([0,100]).range([480,20]);
+        
         yAxis = d3.axisRight()
           .scale(yScale)
           .ticks(8)
           .tickSize(-470);
+        
         d3.select("svg").append("g")
             .attr("transform", "translate(470,0)")
             .attr("id", "yAxisG")
             .call(yAxis);
+        
         xAxis = d3.axisBottom()
           .scale(xScale)
           .tickSize(-470)
           .tickValues([1,2,3,4,5,6,7]);
+        
         d3.select("svg").append("g")
             .attr("transform", "translate(0,480)")
             .attr("id", "xAxisG")
             .call(xAxis);
+        
         d3.select("svg").selectAll("circle.median")
           .data(data)
           .enter()
@@ -37,11 +44,12 @@
             .attr("cx", d => xScale(d.day))
             .attr("cy", d => yScale(d.median))
             .style("fill", "darkgray");
+        
         d3.select("svg").selectAll("g.box")
           .data(data).enter()
           .append("g")
             .attr("class", "box")
-            .attr("transform", d => "translate(" + xScale(d.day) + "," + yScale(d.median) + ")")
+            .attr("transform", d => `translate( ${xScale(d.day)} , ${yScale(d.median)} )`)
             .each(function(d,i) {
               d3.select(this)
                 .append("rect")

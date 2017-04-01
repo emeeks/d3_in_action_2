@@ -1,8 +1,11 @@
 d3.gridLayout = function() {
+	
   var gridSize = [0,10];
   var gridXScale = d3.scaleLinear();
   var gridYScale = d3.scaleLinear();
+  
   function processGrid(data) {
+	  
     var rows = Math.ceil(Math.sqrt(data.length));
     var columns = rows;
     var gridCellWidth = gridSize[0] / columns;
@@ -27,10 +30,13 @@ d3.gridLayout = function() {
     }
     return data;
   }
+  
   processGrid.size = function (newSize) {
     if (!arguments.length) return gridSize;
     gridSize = newSize;
     return this;
   }
+  
   return processGrid;
+  
 };

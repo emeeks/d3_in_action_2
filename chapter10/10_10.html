@@ -7,15 +7,16 @@
     <script src="d3.simplelegend_02.js" type="text/JavaScript"></script>
   </head>
   <body>
-    <svg height="500" width="500"></svg>
-    <script type="text/javascript">
-      d3.json("../data/world.geojson ", data => {
-        makeAGrid(data);
-      });
+    <svg style="height: 500px; width: 500px;"></svg>
+    <script>
+      d3.json("../data/world.geojson ", data => makeAGrid(data));
+      
       function makeAGrid(data) {
+    	  
         var grid = d3.gridLayout();
         grid.size([300,300]);
         var griddedData = grid(data.features);
+        
         griddedData.forEach(country => {
           country.size = d3.geoArea(country);
         });
@@ -39,12 +40,14 @@
             .style("stroke-width", "1px");
 
         var newLegend = d3.simpleLegend().scale(countryColor);
+        
         d3.select("svg").append("g")
             .attr("id","legend")
             .attr("transform", "translate(50,400)")
             .call(newLegend);
 
         d3.select("#legend").selectAll("rect").on("mouseover", legendOver);
+        
         function legendOver(d) {
           d3.selectAll("circle")
               .style("opacity", p => {

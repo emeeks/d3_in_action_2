@@ -13,8 +13,9 @@
   <body>
     <div id="borderdiv">
     </div>
-    <script type="text/javascript">
+    <script>
       var someData = ["filler", "filler", "filler", "filler"];
+      
       d3.select("body").selectAll("div")
         .data(someData)
         .enter()
@@ -24,8 +25,12 @@
           .html("Even More Wow")
           .style("font-weight", "900");
 
-      smallerNumbers = someNumbers
+      
+      var someNumbers = [17, 82, 9, 500, 40];
+      
+      var smallerNumbers = someNumbers
         .filter(function(el) {return el <= 40 ? this : null;});
+      
       d3.select("body").selectAll("div")
         .data(smallerNumbers)
         .enter()

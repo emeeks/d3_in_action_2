@@ -10,20 +10,23 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/tweetdata.csv", lineChart);
+      
       function lineChart(data) {
         
         xScale = d3.scaleLinear().domain([1,10.5]).range([20,480]);
         yScale = d3.scaleLinear().domain([0,35]).range([480,20]);
+        
         xAxis = d3.axisBottom()
           .scale(xScale)
           .tickSize(480)
           .tickValues([1,2,3,4,5,6,7,8,9,10]);
         
         d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+        
         yAxis = d3.axisRight()
           .scale(yScale)
           .ticks(10)
@@ -36,8 +39,8 @@
           .append("circle")
             .attr("class", "tweets")
             .attr("r", 5)
-            .attr("cx", function(d) {return xScale(d.day)})
-            .attr("cy", function(d) {return yScale(d.tweets)})
+            .attr("cx", d => xScale(d.day))
+            .attr("cy", d => yScale(d.tweets))
             .style("fill", "#fe9a22");
         
         d3.select("svg").selectAll("circle.retweets")
@@ -46,8 +49,8 @@
           .append("circle")
             .attr("class", "retweets")
             .attr("r", 5)
-            .attr("cx", function(d) {return xScale(d.day)})
-            .attr("cy", function(d) {return yScale(d.retweets)})
+            .attr("cx", d => xScale(d.day))
+            .attr("cy", d => yScale(d.retweets))
             .style("fill", "#5eaec5");
         
         d3.select("svg").selectAll("circle.favorites")
@@ -56,8 +59,8 @@
           .append("circle")
             .attr("class", "favorites")
             .attr("r", 5)
-            .attr("cx", function(d) {return xScale(d.day)})
-            .attr("cy", function(d) {return yScale(d.favorites)})
+            .attr("cx", d => xScale(d.day))
+            .attr("cy", d => yScale(d.favorites))
             .style("fill", "#92c463");
         
         var tweetLine = d3.line()

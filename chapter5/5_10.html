@@ -7,14 +7,16 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/movies.csv", dataViz);
+      
       function dataViz(data) {
         
         var xScale = d3.scaleLinear().domain([0, 10]).range([0, 500]);
         var yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
+        
         var movies = ["titanic", "avatar", "akira", "frozen", "deliverance", "avengers"];
         
         var fillScale = d3.scaleOrdinal()

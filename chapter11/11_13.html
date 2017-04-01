@@ -25,8 +25,8 @@
   </head>
   <body>
     <canvas height="500" width="500"></canvas>
-    <svg height="500" width="500"></svg>
-    <script type="text/javascript">
+    <svg style="height: 500px; width: 500px;"></svg>
+    <script>
       var sampleData = d3.range(10000).map(d => {
         var datapoint = {};
         datapoint.id = "Sample Node " + d;
@@ -58,7 +58,8 @@
         d3.selectAll("circle")
           .style("fill", "#75739F")
           .each(d => {d.selected = false});
-        quadIndex.visit(function(node,x0,y0,x1,y1) {
+        
+        quadIndex.visit((node,x0,y0,x1,y1) => {
 
           if (node.data) {
             if (node.data.x >= e[0][0] && node.data.x <= e[1][0]

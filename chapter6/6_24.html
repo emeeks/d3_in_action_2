@@ -7,12 +7,13 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/tweets.json", viz);
       
       function viz(data) {
+    	  
         var depthScale = d3.scaleOrdinal()
           .range(["#5EAFC6", "#FE9922", "#93c464", "#75739F"]);
         
@@ -27,6 +28,7 @@
         var treemapLayout = d3.treemap()
           .size([500,500])
           .padding(d => d.depth * 5 + 5);
+        
         treemapLayout(root);
         
         d3.select("svg")

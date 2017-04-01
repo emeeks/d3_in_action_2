@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <script src="d3.grid_03.js" type="text/JavaScript"></script>
+  </head>
+  <body>
+    <svg style="height: 500px; width: 500px;"></svg>
+    <script>
+      d3.csv("../data/nodelist.csv", makeAGrid);
+      
+      function makeAGrid(data) {
+    	  
+        var salaryScale = d3.scaleLinear().domain([0,300000]).range([1,30]).clamp(true);
+
+        var grid = d3.gridLayout();
+        grid.size([200,200]);
+        var griddedData = grid(data);
+        
+        d3.select("svg")
+          .append("g")
+            .attr("transform", "translate(50,50)")
+          .selectAll("circle").data(griddedData)
+          .enter()
+          .append("circle")
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", d => salaryScale(d.salary))
+            .style("fill", "#93C464");
+        
+        var newEmployees = [];
+        for (var x = 0;x < 14;x++) {
+          var newPerson = {id: "New Person " + x, salary: x * 20000};
+          newEmployees.push(newPerson);
+        }
+
+        var doubledArray = data.concat(newEmployees);
+        var newGriddedData = grid(doubledArray);
+        
+        d3.select("g").selectAll("circle").data(newGriddedData)
+          .enter()
+          .append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", d => salaryScale(d.salary))
+            .style("fill", "#41A368");
+        
+        d3.select("g").selectAll("circle")
+          .transition()
+            .duration(1000)
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .on("end", resizeGrid1);
+
+        function resizeGrid1() {
+          grid.size([200,400]);
+          grid(doubledArray);
+          d3.select("g").selectAll("circle")
+            .transition()
+              .duration(1000)
+              .attr("cx", d => d.x)
+              .attr("cy", d => d.y)
+              .on("end", resizeGrid2);
+        }
+
+        function resizeGrid2() {
+          grid.size([400,200]);
+          grid(doubledArray);
+          d3.select("g").selectAll("circle")
+            .transition()
+              .duration(1000)
+              .attr("cx", d => d.x)
+              .attr("cy", d => d.y);
+        }
+      }
+    </script>
+  </body>
+</html>

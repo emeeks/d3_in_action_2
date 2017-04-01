@@ -8,12 +8,15 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/worddata.csv", dataViz);
+      
       function dataViz(data) {
+    	  
         var wordScale = d3.scaleLinear().domain([0,75]).range([10,160]);
+        
         d3.cloud()
           .size([500, 500])
           .rotate(0)
@@ -21,10 +24,12 @@
           .fontSize(d => wordScale(d.frequency))
           .on("end", draw)
           .start();
+        
         function draw(words) {
           var wordG = d3.select("svg").append("g")
             .attr("id", "wordCloudG")
             .attr("transform","translate(250,250)");
+          
           wordG.selectAll("text")
             .data(words)
             .enter()
@@ -33,7 +38,7 @@
               .style("fill", "#4F442B")
               .attr("text-anchor", "middle")
               .attr("transform", d =>
-                "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
+                `translate(${[d.x, d.y]})rotate(${d.rotate})`)
               .text(d => d.text);
         }
       }

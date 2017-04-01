@@ -8,11 +8,13 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/sitestats.json", sankeyViz)
+      
       function sankeyViz(data) {
+    	  
         var sankey = d3.sankey()
           .nodeWidth(1)
           .nodePadding(200)
@@ -24,8 +26,10 @@
         var intensityRamp = d3.scaleLinear()
           .domain([0,d3.max(data.links, d => d.value) ])
           .range(["#fcd88b", "#cf7d1c"]);
+        
         d3.select("svg").append("g")
           .attr("transform", "translate(20,20)").attr("id", "sankeyG");
+        
         d3.select("#sankeyG").selectAll(".link")
           .data(data.links)
           .enter().append("path")
@@ -47,7 +51,7 @@
           .data(data.nodes)
           .enter().append("g")
             .attr("class", "node")
-            .attr("transform", d => "translate(" + d.x + "," + d.y + ")");
+            .attr("transform", d => `translate(${d.x} , ${d.y} )`);
         
         d3.selectAll(".node").append("circle")
             .attr("height", d => d.dy)

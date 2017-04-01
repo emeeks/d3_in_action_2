@@ -6,14 +6,15 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
-      d3.json("../data/tweets.json", data => {dataViz(data.tweets)})
+    <script>
+      d3.json("../data/tweets.json", data => dataViz(data.tweets))
 
       function dataViz(incomingData) {
         incomingData.forEach(d => {
           d.impact = d.favorites.length + d.retweets.length;
           d.tweetTime = new Date(d.timestamp);
         });
+        
         var maxImpact = d3.max(incomingData, d => d.impact);
         var startEnd = d3.extent(incomingData, d => d.tweetTime);
         var timeRamp = d3.scaleTime().domain(startEnd).range([20,480]);
@@ -29,16 +30,14 @@
           .enter()
           .append("g")
             .attr("transform", d =>
-              "translate(" +
-              timeRamp(d.tweetTime) + "," + (480 - yScale(d.impact))
-              + ")");
+              `translate( ${timeRamp(d.tweetTime)} , ${(480 - yScale(d.impact))} )`);
         tweetG.append("circle")
             .attr("r", d => radiusScale(d.impact))
             .style("fill", "#75739F")
             .style("stroke", "black")
             .style("stroke-width", "1px");
         tweetG.append("text")
-            .text(d => d.user + "-" + d.tweetTime.getHours());
+        	.text(d => `${d.user}-${d.tweetTime.getHours()}`);
       }
     </script>
   </body>

@@ -6,18 +6,21 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
-      d3.json("../data/tweets.json", data => {dataViz(data.tweets)})
+    <script>
+      d3.json("../data/tweets.json", data => dataViz(data.tweets))
 
       function dataViz(incomingData) {
         var nestedTweets = d3.nest()
           .key(d => d.user)
           .entries(incomingData);
+        
         nestedTweets.forEach(d => {
           d.numTweets = d.values.length;
         });
+        
         var maxTweets = d3.max(nestedTweets, d => d.numTweets);
         var yScale = d3.scaleLinear().domain([0,maxTweets]).range([0,500]);
+        
         d3.select("svg")
           .selectAll("rect")
           .data(nestedTweets)

@@ -16,14 +16,14 @@
     <div id="controls">
     </div>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       var roleScale = d3.scaleOrdinal()
         .domain(["contractor", "employee", "manager"])
         .range(["#75739F", "#41A368", "#FE9922"]);
       
-      var PromiseWrapper = (d) => new Promise(resolve => d3.csv(d, (p) => resolve(p)));
+      var PromiseWrapper = d => new Promise(resolve => d3.csv(d, p => resolve(p)));
       
       Promise
         .all([
@@ -78,7 +78,7 @@
         simulation.force("link").links(edges);
         
         d3.select("svg").selectAll("line.link")
-          .data(edges, d => d.source.id + "-" + d.target.id)
+          .data(edges, d => `${d.source.id}-${d.target.id}`)
           .enter()
           .append("line")
             .attr("class", "link")
@@ -93,7 +93,7 @@
           .append("g")
             .attr("class", "node");
         nodeEnter.append("circle")
-            .attr("r", function(d) {return d.degreeCentrality * 2;})
+            .attr("r", d => d.degreeCentrality * 2)
             .style("fill", d => roleScale(d.role));
         
         nodeEnter.append("text")
@@ -105,16 +105,19 @@
             .on("click", manuallyPositionNodes);
         
         function manuallyPositionNodes() {
+        	
           var xExtent = d3.extent(simulation.nodes(), d => parseInt(d.degreeCentrality));
           var yExtent = d3.extent(simulation.nodes(), d => parseInt(d.salary));
           var xScale = d3.scaleLinear().domain(xExtent).range([50,450]);
           var yScale = d3.scaleLinear().domain(yExtent).range([450,50]);
+          
           simulation.stop();
+          
           d3.selectAll("g.node")
             .transition()
               .duration(1000)
-              .attr("transform", d => "translate("+ xScale(d.degreeCentrality)
-                +","+yScale(d.salary) +")");
+              .attr("transform", d => `translate(${xScale(d.degreeCentrality)} , ${yScale(d.salary) })`);
+          
           d3.selectAll("line.link")
             .transition()
               .duration(1000)
@@ -122,12 +125,14 @@
               .attr("y1", d => yScale(d.source.salary))
               .attr("x2", d => xScale(d.target.degreeCentrality))
               .attr("y2", d => yScale(d.target.salary));
+          
           var xAxis = d3.axisBottom().scale(xScale).tickSize(4);
           var yAxis = d3.axisRight().scale(yScale).tickSize(4);
-          d3.select("svg").append("g").attr("transform",
-            "translate(0,460)").call(xAxis);
-          d3.select("svg").append("g").attr("transform",
-            "translate(460,0)").call(yAxis);
+          
+          d3.select("svg").append("g").attr("transform", "translate(0,460)").call(xAxis);
+          
+          d3.select("svg").append("g").attr("transform", "translate(460,0)").call(yAxis);
+          
           d3.selectAll("g.node").each(d => {
             d.x = xScale(d.degreeCentrality);
             d.vx = 0;
@@ -142,8 +147,9 @@
               .attr("x2", d => d.target.x)
               .attr("y1", d => d.source.y)
               .attr("y2", d => d.target.y);
+          
           d3.selectAll("g.node")
-              .attr("transform", d => "translate("+d.x+","+d.y+")");
+          	  .attr("transform", d => `translate(${d.x},${d.y})`);
         }
       }
     </script>

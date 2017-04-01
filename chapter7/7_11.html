@@ -14,14 +14,14 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       var roleScale = d3.scaleOrdinal()
         .domain(["contractor", "employee", "manager"])
         .range(["#75739F", "#41A368", "#FE9922"]);
       
-      var PromiseWrapper = (d) => new Promise(resolve => d3.csv(d, (p) => resolve(p)));
+      var PromiseWrapper = d => new Promise(resolve => d3.csv(d, p => resolve(p)));
       
       Promise
         .all([
@@ -68,7 +68,7 @@
         simulation.force("link").links(edges);
         
         d3.select("svg").selectAll("line.link")
-          .data(edges, d => d.source.id + "-" + d.target.id)
+          .data(edges, d => `${d.source.id}-${d.target.id}`)
           .enter()
           .append("line")
             .attr("class", "link")
@@ -97,7 +97,7 @@
               .attr("y1", d => d.source.y)
               .attr("y2", d => d.target.y);
           d3.selectAll("g.node")
-              .attr("transform", d => "translate("+d.x+","+d.y+")");
+          	  .attr("transform", d => `translate(${d.x},${d.y})`);
         }
       }
     </script>

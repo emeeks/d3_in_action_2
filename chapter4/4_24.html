@@ -19,14 +19,17 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/movies.csv", lineChart);
+      
       function lineChart(data) {
+    	  
         var fillScale = d3.scaleOrdinal()
           .domain(["titanic", "avatar", "akira", "frozen", "deliverance", "avengers"])
           .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F", "#5eafc6", "#41a368"]);
+        
         var xScale = d3.scaleLinear().domain([ 1, 10 ]).range([ 20, 470 ]);
         var yScale = d3.scaleLinear().domain([ 0, 55 ]).range([ 480, 20 ]);
         
@@ -36,6 +39,7 @@
           .tickValues([1,2,3,4,5,6,7,8,9,10]);
         
         d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+        
         var yAxis = d3.axisRight()
           .scale(yScale)
           .ticks(10)
@@ -53,7 +57,7 @@
               .curve(d3.curveBasis);
             d3.select("svg")
               .append("path")
-                .style("id", key + "Area")
+                .style("id", `${key} Area`)
                 .attr("d", movieArea(data))
                 .attr("fill", fillScale(key))
                 .attr("stroke", "black")
@@ -61,6 +65,7 @@
             n++;
           }
         });
+        
         function simpleStacking( lineData, lineKey) {
           var newHeight = 0;
           Object.keys(lineData).every(key => {

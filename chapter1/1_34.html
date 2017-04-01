@@ -7,13 +7,14 @@
     <div id="vizcontainer">
       <svg style="width:500px;height:500px;border:1px lightgray solid;" />
     </div>
-    <script type="text/javascript">
+    <script>
       d3.select("svg")
         .append("circle")
           .attr("r", 20)
           .attr("cx",20)
           .attr("cy",20)
           .style("fill","red");
+      
       d3.select("svg")
         .append("text")
           .attr("id", "a")
@@ -21,12 +22,14 @@
           .attr("y",20)
           .style("opacity", 0)
           .text("HELLO WORLD");
+      
       d3.select("svg")
         .append("circle")
           .attr("r", 100)
           .attr("cx",400)
           .attr("cy",400)
           .style("fill","lightblue");
+      
       d3.select("svg")
         .append("text")
           .attr("id", "b")

@@ -27,11 +27,12 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:500px;height:500px;" />
+      <svg style="width:500px;height:500px;"></svg>
     </div>
-    <div id="controls" />
-    <script type="text/javascript">
-      d3.csv("../data/worldcup.csv", data => {overallTeamViz(data)});
+    <div id="controls"></div>
+    
+    <script>
+      d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
 
       function overallTeamViz(incomingData) {
         d3.select("svg")
@@ -43,7 +44,7 @@
           .enter()
           .append("g")
             .attr("class", "overallG")
-            .attr("transform", (d, i) =>"translate(" + (i * 50) + ", 0)");
+            .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
 
         var teamG = d3.selectAll("g.overallG");
 
@@ -68,12 +69,14 @@
 
         function highlightRegion (d) {
           d3.select(this).select("text").classed("active", true).attr("y", 10);
+          
           d3.selectAll("g.overallG").select("circle")
             .each(function (p) {
               p.region == d.region ?
                 d3.select(this).classed("active", true) :
                 d3.select(this).classed("inactive", true);
             });
+          
           this.parentElement.appendChild(this);
         };
 
@@ -82,12 +85,14 @@
 
         function unHighlight() {
           d3.selectAll("g.overallG").select("circle").attr("class", "");
+          
           d3.selectAll("g.overallG").select("text")
             .classed("active", false).attr("y", 30);
         };
 
         var dataKeys = Object.keys(incomingData[0])
           .filter(d => d !== "team" && d !== "region");
+        
         d3.select("#controls").selectAll("button.teams")
           .data(dataKeys).enter()
           .append("button")
@@ -96,8 +101,10 @@
 
         function buttonClick(datapoint) {
           var maxValue = d3.max(incomingData, d => parseFloat(d[datapoint]));
+          
           var radiusScale = d3.scaleLinear()
             .domain([ 0, maxValue ]).range([ 2, 20 ]);
+          
           d3.selectAll("g.overallG").select("circle")
             .attr("r", d => radiusScale(d[datapoint]));
         }

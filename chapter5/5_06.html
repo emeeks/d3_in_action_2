@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <style>
+      .tick > line {
+        stroke: #EBD8C1;
+      }
+
+      text {
+        fill: #EBD8C1;
+      }
+
+      path.domain {
+        stroke: none;
+        fill: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viz">
+      <svg style="width:600px;height:600px;" ></svg>
+    </div>
+    <script>
+      var pieChart = d3.pie();
+      var yourPie = pieChart([1,1,2]);
+      
+      var newArc = d3.arc();
+      newArc.innerRadius(0)
+        .outerRadius(100);
+      
+      var fillScale = d3.scaleOrdinal()
+        .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F"]);
+      
+      d3.select("svg")
+        .append("g")
+          .attr("transform","translate(250,250)")
+        .selectAll("path")
+        .data(yourPie)
+        .enter()
+        .append("path")
+          .attr("d", newArc)
+          .style("fill", (d,i) => fillScale(i))
+          .style("stroke", "black")
+          .style("stroke-width", "2px");
+      
+    </script>
+  </body>
+</html>

@@ -27,13 +27,16 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/movies.csv", lineChart);
+      
       function lineChart(data) {
+    	  
         var xScale = d3.scaleLinear().domain([ 1, 10 ]).range([ 20, 470 ]);
-        var yScale = d3.scaleLinear().domain([ -40, 40 ]).range([ 480, 20 ])
+        var yScale = d3.scaleLinear().domain([ -40, 40 ]).range([ 480, 20 ]);
+        
         var xAxis = d3.axisBottom()
           .scale(xScale)
           .tickSize(480)
@@ -45,6 +48,7 @@
           .scale(yScale)
           .ticks(10)
           .tickSize(480);
+        
         d3.select("svg").append("g").attr("id", "yAxisG").call(yAxis);
         
         Object.keys(data[0]).forEach(key => {
@@ -56,7 +60,7 @@
               .curve(d3.curveCardinal);
             d3.select("svg")
               .append("path")
-                .style("id", key + "Area")
+                .style("id", `${key} Area`)
                 .attr("d", movieArea(data));
           };
         });

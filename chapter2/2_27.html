@@ -27,8 +27,8 @@
   <body>
     <svg style="width:500px;height:500px;">
     </svg>
-    <script type="text/javascript">
-      d3.json("../data/tweets.json", data => {dataViz(data.tweets)});
+    <script>
+      d3.json("../data/tweets.json", data => dataViz(data.tweets));
 
       function dataViz(incomingData) {
         incomingData.forEach(d => {
@@ -55,6 +55,7 @@
             .style("stroke-width", "1px");
 
         var filteredData = incomingData.filter(d => d.impact > 0);
+        
         d3.selectAll("circle")
           .data(filteredData, d => JSON.stringify(d))
           .exit()

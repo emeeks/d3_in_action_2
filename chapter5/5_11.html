@@ -7,15 +7,17 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.csv("../data/movies.csv", dataViz);
+      
       function dataViz(data) {
         
         var xScale = d3.scaleLinear().domain([0, 10]).range([0, 500]);
         var yScale = d3.scaleLinear().domain([0, 60]).range([480, 0]);
         var heightScale = d3.scaleLinear().domain([0, 60]).range([0, 480]);
+        
         var movies = ["titanic", "avatar", "akira", "frozen", "deliverance", "avengers"];
         
         var fillScale = d3.scaleOrdinal()
@@ -28,6 +30,7 @@
           .tickValues([1,2,3,4,5,6,7,8,9,10]);
         
         d3.select("svg").append("g").attr("id", "xAxisG").call(xAxis);
+        
         var yAxis = d3.axisRight()
           .scale(yScale)
           .ticks(10)

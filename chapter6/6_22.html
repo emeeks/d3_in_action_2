@@ -7,18 +7,20 @@
   </head>
   <body>
     <div id="viz">
-      <svg style="width:600px;height:600px;" />
+      <svg style="width:600px;height:600px;" ></svg>
     </div>
-    <script type="text/javascript">
+    <script>
       d3.json("../data/tweets.json", viz);
       
       function viz(data) {
+    	  
         var depthScale = d3.scaleOrdinal()
           .range(["#5EAFC6", "#FE9922", "#93c464", "#75739F"]);
         
         var nestedTweets = d3.nest()
           .key(d => d.user)
           .entries(data.tweets);
+        
         var packableTweets = {id: "All Tweets", values: nestedTweets};
         
         var root = d3.hierarchy(packableTweets, d => d.values)
