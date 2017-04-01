@@ -70,18 +70,23 @@
         ];
       }
 
-      d3.json("../data/world.geojson", data => {createMap(data)});
+      d3.json("../data/world.geojson", data => createMap(data));
+      
       function createMap(countries) {
+    	  
         var projection = d3.geoMercator()
           .scale(100).translate([250,250]);
+        
         var geoPath = d3.geoPath().projection(projection);
         var g = d3.select("svg").append("g");
+        
         g.selectAll("path.country")
           .data(countries.features)
           .enter()
           .append("path")
             .attr("d", geoPath)
             .attr("class", "country");
+        
         g.selectAll("path.sample")
           .data(sampleData)
           .enter()

@@ -70,9 +70,10 @@
         ];
       }
 
-      d3.json("../data/world.geojson", data => {createMap(data)});
+      d3.json("../data/world.geojson", data => createMap(data));
 
       function createMap(countries) {
+    	  
         var projection = d3.geoMercator().scale(50).translate([150,100]);
         var geoPath = d3.geoPath().projection(projection);
 
@@ -95,19 +96,23 @@
           var context = d3.select("canvas").node().getContext("2d");
           context.clearRect(0,0,500,500);
           geoPath.context(context);
+          
           context.strokeStyle = "rgba(79,68,43,.5)";
           context.fillStyle = "rgba(196,185,172,.5)";
           context.fillOpacity = 0.5;
           context.lineWidth = "1px";
+          
           for (var x in countries.features) {
             context.beginPath();
             geoPath(countries.features[x]);
             context.stroke();
             context.fill();
           }
+          
           context.strokeStyle = "#41A368";
           context.fillStyle = "rgba(147,196,100,.5)";
           context.lineWidth = "1px";
+          
           for (var x in sampleData) {
             context.beginPath();
             geoPath(sampleData[x]);

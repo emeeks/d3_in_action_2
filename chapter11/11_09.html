@@ -51,13 +51,16 @@
     <script>
       var linkScale = d3.scaleLinear()
         .domain([0,.9,.95,1]).range([0,10,100,1000]);
+      
       var sampleNodes = d3.range(3000).map(d => {
         var datapoint = {};
         datapoint.id = "Sample Node " + d;
         return datapoint;
       });
+      
       var sampleLinks = [];
       var y = 0;
+      
       while (y < 2000) {
         var randomSource = Math.floor(Math.random() * 1000);
         var randomTarget = Math.floor(linkScale(Math.random()));
@@ -85,6 +88,7 @@
         .enter()
         .append("line")
           .attr("class", "link");
+      
       d3.select("svg").selectAll("circle.node")
         .data(sampleNodes)
         .enter()
@@ -98,6 +102,7 @@
             .attr("y1", d =>d.source.y)
             .attr("x2", d =>d.target.x)
             .attr("y2", d =>d.target.y);
+        
         d3.selectAll("circle.node")
             .attr("cx", d =>d.x)
             .attr("cy", d =>d.y);

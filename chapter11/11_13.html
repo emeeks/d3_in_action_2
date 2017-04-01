@@ -58,7 +58,8 @@
         d3.selectAll("circle")
           .style("fill", "#75739F")
           .each(d => {d.selected = false});
-        quadIndex.visit(function(node,x0,y0,x1,y1) {
+        
+        quadIndex.visit((node,x0,y0,x1,y1) => {
 
           if (node.data) {
             if (node.data.x >= e[0][0] && node.data.x <= e[1][0]
