@@ -7,11 +7,15 @@
   <body>
     <svg style="height: 500px; width: 500px;"></svg>
     <script>
+    
       d3.csv("../data/nodelist.csv", makeAGrid);
+      
       function makeAGrid(data) {
+    	  
         var grid = d3.gridLayout();
         grid.size([200,200]);
         var griddedData = grid(data);
+        
         d3.select("svg")
           .append("g")
             .attr("transform", "translate(50,50)")

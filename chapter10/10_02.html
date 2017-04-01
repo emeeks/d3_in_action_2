@@ -8,7 +8,9 @@
     <svg style="height: 500px; width: 500px;"></svg>
     <script>
       d3.csv("../data/nodelist.csv", makeAGrid);
+      
       function makeAGrid(data) {
+    	  
         var scale = d3.scaleLinear().domain([0,5]).range([100,400]);
         var salaryScale = d3.scaleLinear().domain([0,300000]).range([1,30]).clamp(true);
 
@@ -29,8 +31,10 @@
           var newPerson = {id: "New Person " + x, salary: x * 20000};
           newEmployees.push(newPerson);
         }
+        
         var doubledArray = data.concat(newEmployees);
         var newGriddedData = grid(doubledArray);
+        
         d3.select("svg").selectAll("circle")
           .data(newGriddedData)
           .enter()
@@ -39,9 +43,10 @@
             .attr("cy", 0)
             .attr("r", d => salaryScale(d.salary))
             .style("fill", "#41A368");
+        
         d3.select("svg").selectAll("circle")
           .transition()
-            .duration(20000)
+            .duration(1000)
             .attr("cx", d => scale(d.x))
             .attr("cy", d => scale(d.y));
       }

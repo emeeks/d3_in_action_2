@@ -8,16 +8,18 @@
   <body>
     <svg style="height: 500px; width: 500px;"></svg>
     <script>
-      d3.json("../data/world.geojson ", data => {
-        makeAGrid(data);
-      });
+      d3.json("../data/world.geojson ", data => makeAGrid(data));
+      
       function makeAGrid(data) {
+    	  
         var grid = d3.gridLayout();
         grid.size([300,300]);
         var griddedData = grid(data.features);
+        
         griddedData.forEach(country => {
           country.size = d3.geoArea(country);
         });
+        
         d3.select("svg")
           .append("g")
             .attr("transform", "translate(50,50)")
@@ -33,8 +35,10 @@
 
         var griddedData = d3.selectAll("circle").data();
         var sizeExtent = d3.extent(griddedData, d => d.size);
+        
         var countryColor = d3.scaleQuantize()
           .domain(sizeExtent).range(colorbrewer.Reds[7]);
+        
         d3.selectAll("circle").style("fill", d => countryColor(d.size));
       }
     </script>
