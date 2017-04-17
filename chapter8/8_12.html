@@ -61,7 +61,7 @@
         });
 
       function createMap(countries, cities) {
-        projection = d3.geoOrthographic()
+        var projection = d3.geoOrthographic()
           .scale(200)
           .translate([250, 250])
           .center([0,0]);

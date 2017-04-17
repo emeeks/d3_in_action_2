@@ -48,7 +48,7 @@
       <svg style="width:600px;height:600px;" ></svg>
     </div>
     <script>
-      var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, p => resolve(p)));
+      var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, (p) => resolve(p)));
 
       Promise
         .all([
