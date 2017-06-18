@@ -56,7 +56,7 @@
               .curve(d3.curveCardinal);
             d3.select("svg")
               .append("path")
-                .style("id", `${key} Area`)
+                .attr("id", `${key}Area`)
                 .attr("d", movieArea(data));
           }
         });
