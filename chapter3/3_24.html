@@ -103,7 +103,11 @@
             .range(["#5eafc6", "#FE9922", "#93C464", "#fcbc34" ]);
           
           d3.selectAll("path")
-              .style("fill", p => fourColorScale(p.region))
+              .style("fill", p => {
+                if (p) {
+                   fourColorScale(p.region);
+                 }
+              })
               .style("stroke", "black").style("stroke-width", "2px");
         }
       }
