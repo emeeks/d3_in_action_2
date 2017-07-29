@@ -49,11 +49,11 @@
       <svg style="width:500px;height:500px;" ></svg>
     </div>
     <div id="controls" ></div>
-    
+
     <script>
-      
+
       d3.csv("../data/worldcup.csv", data => overallTeamViz(data));
-      
+
       function overallTeamViz(incomingData) {
         d3.select("svg")
           .append("g")
@@ -65,9 +65,9 @@
           .append("g")
             .attr("class", "overallG")
             .attr("transform", (d, i) =>`translate(${(i * 50)}, 0)`);
-        
+
         var teamG = d3.selectAll("g.overallG");
-        
+
         teamG
           .append("circle").attr("r", 0)
           .transition()
@@ -77,35 +77,35 @@
           .transition()
             .duration(500)
             .attr("r", 20);
-        
+
         teamG
           .append("text")
             .style("text-anchor", "middle")
             .attr("y", 30)
             .text(d => d.team);
-        
+
         d3.html("../resources/icon.svg", loadSVG);
-        
+
         function loadSVG(svgData) {
-          d3.selectAll("g").each(function() {
+          d3.selectAll("g.overallG").each(function() {
             var gParent = this;
             d3.select(svgData).selectAll("path").each(function() {
               gParent.appendChild(this.cloneNode(true));
             });
           });
-          
+
           d3.selectAll("g.overallG").each(function(d) {
             d3.select(this).selectAll("path").datum(d);
           });
-          
+
           var fourColorScale = d3.scaleOrdinal()
-            .domain(["UEFA", "CONMEBOL", "CAF", "AFC"])
+            .domain(["UEFA", "CONMEBOL", "CONCACAF", "AFC"])
             .range(["#5eafc6", "#FE9922", "#93C464", "#fcbc34" ]);
-          
+
           d3.selectAll("path")
               .style("fill", p => {
                 if (p) {
-                   fourColorScale(p.region);
+                   return fourColorScale(p.region);
                  }
               })
               .style("stroke", "black").style("stroke-width", "2px");
